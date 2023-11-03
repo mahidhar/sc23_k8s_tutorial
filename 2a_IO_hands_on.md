@@ -1,7 +1,11 @@
 # Scientific Computing with Kubernetes Tutorial
 
-Dealing with data\
+Typical usage workflow\
 Hands on session
+
+## Use an existing application container to run jobs
+
+
 
 ## Simple config files
 
