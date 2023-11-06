@@ -5,7 +5,53 @@ Hands on session
 
 ## Use an existing application container to run jobs
 
+Lets use an existing LAMMPS (a molecular dynamics code) container from dockerhub. 
 
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: lammps-<username>
+spec:
+  template:
+    spec:
+      volumes:
+          - name: scratch
+            emptyDir: {}
+      containers:
+      - name: test
+        image: lammps/lammps:patch_7Jan2022_rockylinux8_openmpi_py3
+        command: ["/bin/bash", "-c"]
+        args:
+        - >-
+            cd /scratch;
+            curl -O https://www.lammps.org/bench/inputs/in.lj.txt ;
+            export OMP_NUM_THREADS=1;
+            lmp_serial < in.lj.txt ;
+            mpirun -np 4 lmp_mpi < in.lj.txt;
+        volumeMounts:
+            - name: scratch
+              mountPath: /scratch
+        resources:
+          limits:
+            memory: 16Gi
+            cpu: "4"
+            ephemeral-storage: 10Gi
+          requests:
+            memory: 16Gi
+            cpu: "4"
+            ephemeral-storage: 10Gi
+      restartPolicy: Never
+```
+Lets run this simple application test:
+
+```
+kubectl apply -f test-lammps.yaml
+```
+Now lets check the output:
+```
+kubectl logs lammps-mahidhar-cj25r
+```
 
 ## Simple config files
 
