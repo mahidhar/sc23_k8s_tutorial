@@ -354,10 +354,11 @@ spec:
 
 Did the job pull the private code this time?
 
-You can now delete the job. Leave the secret for next tasks.
+You can now delete the job and the secret.
 ```
 kubectl delete pod c4p-<username>
 kubectl delete pod c4pt-<username>
+kubectl delete secret github-secret-<username>
 ```
 
 
