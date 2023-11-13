@@ -268,7 +268,7 @@ kubectl delete job c3-<username>
 
 What if you don't want to publish the code? In this example we will use the "Fine-grained" personal token just for one repository, but you can use all other secrets the same way (SSH keys, general tokens, etc).
 
-Let's try running the same job, but access the private repo at https://github.com/PRP-Workshop/PEARC23-code-private :
+Let's try running the same job, but access the private repo at https://github.com/PRP-Workshop/SC23-code-private :
 
 ```yaml
 apiVersion: batch/v1
@@ -291,7 +291,7 @@ spec:
           requests:
             memory: 100Mi
             cpu: 1
-        command: ["sh", "-c", "git clone https://github.com/PRP-Workshop/PEARC23-code-private.git && cd PEARC23-code-private && python3 ./pi.py && echo Done"]
+        command: ["sh", "-c", "git clone https://github.com/PRP-Workshop/SC23-code-private.git && cd SC23-code-private && python3 ./pi.py && echo Done"]
 ```
 
 If you look at the logs (`kubectl logs c4p-<username>-<hash>`), you'll see GitHub complaining about the missing credentials.
