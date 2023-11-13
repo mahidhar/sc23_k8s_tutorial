@@ -3,7 +3,7 @@ Hands on notes for SC23
 
 ## Agenda
 
-All times in Central Time (Dallas, TX, USA).
+All times in MST (Denver, Colorado, USA).
 
 ```
  1:30PM - Introduction and Welcome
