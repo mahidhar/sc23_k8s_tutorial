@@ -29,6 +29,7 @@ Let’s create a simple generic pod, and login into it.
 You can copy-and-paste the lines below, but please do replace “username” with your own id.\
 All the participants in this hands-on session share the same namespace, so you will get name collisions if you don’t.
 
+###### simple.yaml:
 ```yaml
 apiVersion: v1
 kind: Pod
