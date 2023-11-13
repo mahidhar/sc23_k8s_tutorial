@@ -306,7 +306,7 @@ Secrets are very similar to configmaps, but provide a little additional protecto
 Let's create the secret with our personal token:
 
 ```
-kubectl create secret generic github-secret-<username> --from-literal=username=dimm0 --from-literal=token=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
+kubectl create secret generic github-secret-<username> --from-literal=username=dimm0 --from-literal=token=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
 ```
 
 **!! Note that we're providing a very limited token for this tutorial. Please don't expose your own private tokens in this public workspace !!**
