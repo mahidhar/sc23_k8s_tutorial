@@ -266,7 +266,95 @@ kubectl delete job c3-<username>
 
 ```
 
+## Using a secret
 
+What if you don't want to publish the code? In this example we will use the "Fine-grained" personal token just for one repository, but you can use all other secrets the same way (SSH keys, general tokens, etc).
 
+Let's try running the same job, but access the private repo at https://github.com/PRP-Workshop/PEARC23-code-private :
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: c4p-<username>
+spec:
+  completions: 1
+  ttlSecondsAfterFinished: 1800
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: mypod
+        image: cicirello/pyaction:latest
+        resources:
+          limits:
+            memory: 100Mi
+            cpu: 1
+          requests:
+            memory: 100Mi
+            cpu: 1
+        command: ["sh", "-c", "git clone https://github.com/PRP-Workshop/PEARC23-code-private.git && cd PEARC23-code-private && python3 ./pi.py && echo Done"]
+```
+
+If you look at the logs (`kubectl logs c4p-<username>-<hash>`), you'll see GitHub complaining about the missing credentials.
+
+Secrets are very similar to configmaps, but provide a little additional protecton for sensitive information.
+
+Let's create the secret with our personal token:
+
+```
+kubectl create secret generic github-secret-<username> --from-literal=username=dimm0 --from-literal=token=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
+```
+
+**!! Note that we're providing a very limited token for this tutorial. Please don't expose your own private tokens in this public workspace !!**
+
+Let's now use our secret in the job to retrieve the code from our private repo.
+
+Note:
+1. remember to replace the username in 3 places
+2. if you submit directly from command line using `kubectl create -f - << EOF .... EOF`, you have to escape the `$` character in the command
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: c4pt-<username>
+spec:
+  completions: 1
+  ttlSecondsAfterFinished: 1800
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: mypod
+        image: cicirello/pyaction:latest
+        env:
+        - name: GH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: github-secret-<username>
+        - name: GH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: github-secret-<username>
+        resources:
+          limits:
+            memory: 100Mi
+            cpu: 1
+          requests:
+            memory: 100Mi
+            cpu: 1
+        command: ["sh", "-c", "git clone https://$GH_USERNAME:$GH_TOKEN@github.com/PRP-Workshop/SC23-code-private.git && cd SC23-code-private && python3 ./pi.py && echo Done"]
+```
+
+Did the job pull the private code this time?
+
+You can now delete the job. Leave the secret for next tasks.
+```
+kubectl delete pod c4p-<username>
+kubectl delete pod c4pt-<username>
+```
 
 
