@@ -248,7 +248,7 @@ spec:
           requests:
             memory: 100Mi
             cpu: 1
-        command: ["sh", "-c", "git clone https://github.com/PRP-Workshop/PEARC23-code-public.git && cd PEARC23-code-public && python3 ./pi.py && echo Done"]
+        command: ["sh", "-c", "git clone https://github.com/PRP-Workshop/SC23-code-public.git && cd SC23-code-public && python3 ./pi.py && echo Done"]
 ```
 
 Once the pod terminated, check the result with:
@@ -262,8 +262,6 @@ You can now delete the jobs:
 ```
 kubectl delete job c3m-<username>
 kubectl delete job c3-<username>
-```
-
 ```
 
 ## Using a secret
