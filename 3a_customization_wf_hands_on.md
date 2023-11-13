@@ -217,7 +217,7 @@ spec:
           requests:
             memory: 100Mi
             cpu: 1
-        command: ["sh", "-c", "git clone https://github.com/mahidhar/sc23_k8s_tutorial.git && cd sc23_k8s_tutorial && python3 ./pi.py && echo Done"]
+        command: ["sh", "-c", "git clone https://github.com/PRP-Workshop/SC23-code-public.git && cd SC23-code-public && python3 ./pi.py && echo Done"]
 ```
 
 Once the pod terminated, check if the result is correct:
