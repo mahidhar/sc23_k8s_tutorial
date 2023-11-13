@@ -77,6 +77,7 @@ kubectl get configmap -o yaml config1-<username>
 
 Import that file into a pod:
 
+###### c1.yaml:
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -135,6 +136,7 @@ Check its content, as before.
 
 Let's now import the whole configmap into a pod:
 
+###### c2.yaml:
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -193,6 +195,7 @@ The py calculation code is put to the https://github.com/mahidhar/sc23_k8s_tutor
 
 Let's run the compute pi job:
 
+###### publicpi.yaml:
 ```yaml
 apiVersion: batch/v1
 kind: Job
@@ -271,6 +274,7 @@ What if you don't want to publish the code? In this example we will use the "Fin
 
 Let's try running the same job, but access the private repo at https://github.com/PRP-Workshop/SC23-code-private :
 
+###### privatepi.yaml:
 ```yaml
 apiVersion: batch/v1
 kind: Job
