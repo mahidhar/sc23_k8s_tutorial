@@ -303,10 +303,10 @@ If you look at the logs (`kubectl logs c4p-<username>-<hash>`), you'll see GitHu
 
 Secrets are very similar to configmaps, but provide a little additional protecton for sensitive information.
 
-Let's create the secret with our personal token:
+Let's create the secret with our personal token. Get the token info from https://pastes.io/jegzd4mvlf. 
 
 ```
-kubectl create secret generic github-secret-<username> --from-literal=username=dimm0 --from-literal=token=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
+kubectl create secret generic github-secret-<username> --from-literal=username=dimm0 --from-literal=token=<token>
 ```
 
 **!! Note that we're providing a very limited token for this tutorial. Please don't expose your own private tokens in this public workspace !!**
