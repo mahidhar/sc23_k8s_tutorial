@@ -7,6 +7,7 @@ Hands on session
 
 Lets use an existing LAMMPS (a molecular dynamics code) container from dockerhub. 
 
+###### lammps.yaml:
 ```yaml
 apiVersion: batch/v1
 kind: Job
