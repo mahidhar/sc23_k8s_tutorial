@@ -74,10 +74,7 @@ You can also look at its content with
 ```
 kubectl get configmap -o yaml config1-<username>
 ```
-Delete the job once you have checked the output:
-```
-kubectl delete -f lammps.yaml
-```
+
 Import that file into a pod:
 
 ###### c1.yaml:
